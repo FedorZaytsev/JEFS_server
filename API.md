@@ -6,7 +6,7 @@
 ### Save location
 Saves user location on the server
 
-`POST /storage/location`
+`POST /user/<user_id>/storage/location`
 
 ```
 {
@@ -18,7 +18,7 @@ Saves user location on the server
 ### Save step count
 Saves step counter on the server
 
-`POST /storage/stepcount` 
+`POST /user/<user_id>/storage/stepcount` 
 
 ```
 {
@@ -29,7 +29,7 @@ Saves step counter on the server
 ### Get recepies
 Get recepies recommendations from the server
 
-`GET /recommendations/recepies`
+`GET /user/<user_id>/recommendations/recepies`
 
 Answer format:
 
@@ -60,7 +60,7 @@ Answer format:
 ### Get workouts
 Get workout recommendations from the server
 
-`GET /recommendations/workouts`
+`GET /user/<user_id>/recommendations/workouts`
 
 Answer format:
 
