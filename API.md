@@ -6,7 +6,7 @@
 ### Save location
 Saves user location on the server
 
-`POST /user/<user_id>/storage/location`
+`PUT /user/<user_id>/storage/location`
 
 ```
 {
@@ -18,7 +18,7 @@ Saves user location on the server
 ### Save step count
 Saves step counter on the server
 
-`POST /user/<user_id>/storage/stepcount` 
+`PUT /user/<user_id>/storage/stepcount` 
 
 ```
 {
