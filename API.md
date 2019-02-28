@@ -3,6 +3,26 @@
 
 ## API
 
+### Create User
+Creates user. No pass for now
+
+`PUT /user/<user_id>`
+
+```
+{
+	"name": string,
+}
+```
+
+Example:
+
+```
+PUT /user/fedorzaytsev228
+{
+	"name": "Fedor Zaytsev"
+}
+```
+
 ### Save location
 Saves user location on the server
 
