@@ -25,7 +25,9 @@ SECRET_KEY = 'gp)cr&mj$%n_5z7^!nq$gwvf4khan_9y#xghj8+s8-$-75i)j%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'phi.ics.uci.edu'
+]
 
 
 # Application definition
