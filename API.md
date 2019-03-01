@@ -23,6 +23,12 @@ PUT /user/fedorzaytsev228
 }
 ```
 
+### Get User
+Get information about user
+
+`GET /user/<user_id>`
+
+
 ### Save location
 Saves user location on the server
 

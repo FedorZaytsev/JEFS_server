@@ -22,5 +22,5 @@ def index(request):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('user/<slug:user_id>/', include('storage.urls')),
+    path('user/<slug:userId>/', include('storage.urls')),
 ]

@@ -6,12 +6,26 @@ class User(models.Model):
     name = models.CharField(max_length=200)
 
 class Locations(models.Model):
-	user_id = models.CharField(max_length=200, primary_key=True)
+	userId = models.ForeignKey(User, on_delete=models.CASCADE,)
 	longitude = models.FloatField()
 	latitude = models.FloatField()
 	timestamp = models.PositiveIntegerField()
 
+	def __str__(self):
+		return str({
+			'longitude': self.longitude,
+			'latitude': self.latitude,
+			'timestamp': self.timestamp,
+		})
+
 class StepCount(models.Model):
-	user_id = models.CharField(max_length=200, primary_key=True)
+	userId = models.ForeignKey(User, on_delete=models.CASCADE,)
 	stepCount = models.PositiveIntegerField()
 	timestamp = models.PositiveIntegerField()
+
+	def __str__(self):
+		return str({
+			'stepCount': self.stepCount,
+			'timestamp': self.timestamp,
+		})
+

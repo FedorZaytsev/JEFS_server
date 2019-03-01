@@ -26,7 +26,9 @@ SECRET_KEY = 'gp)cr&mj$%n_5z7^!nq$gwvf4khan_9y#xghj8+s8-$-75i)j%'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'phi.ics.uci.edu'
+    'phi.ics.uci.edu',
+    'localhost',
+    '127.0.0.1',
 ]
 
 
