@@ -4,6 +4,13 @@ from django.db import models
 class User(models.Model):
     id = models.CharField(max_length=200, primary_key=True)
     name = models.CharField(max_length=200)
+    weight = models.FloatField()
+    height = models.FloatField()
+    bmigoal = models.FloatField()
+    gender = models.CharField(max_length=10)
+    age = models.PositiveIntegerField()
+    ethnicity = models.CharField(max_length=200)
+
 
 class Locations(models.Model):
 	userId = models.ForeignKey(User, on_delete=models.CASCADE,)

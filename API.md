@@ -11,6 +11,12 @@ Creates user. No pass for now
 ```
 {
 	"name": string,
+	"weight": float,
+	"height": float,
+	"bmigoal": float,
+	"gender": string,
+	"age": int,
+	"ethnicity": string,
 }
 ```
 
@@ -22,6 +28,24 @@ PUT /user/fedorzaytsev228
 	"name": "Fedor Zaytsev"
 }
 ```
+
+### Set user params
+Set user params, like BMI, weight, height ...
+
+`POST /user/<user_id>`
+
+```
+{
+	"name": string,
+	"weight": float,
+	"height": float,
+	"bmigoal": float,
+	"gender": string,
+	"age": int,
+	"ethnicity": string,
+}
+```
+
 
 ### Get User
 Get information about user

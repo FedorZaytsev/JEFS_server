@@ -61,8 +61,14 @@ class LocationView(View):
 class UserView(View):
 	@staticmethod
 	def put(request, userId=None):
-		body = json.loads(request.body.decode('utf-8'))
-		usr = User(id=userId, name=body['name'])
+		body = None
+		try:
+			body = json.loads(request.body.decode('utf-8'))
+		except json.decoder.JSONDecodeError as e:
+			return HttpResponseBadRequest('Invalid json: {}'.format(e))
+
+
+		usr = User(id=userId, **body)
 		usr.save()
 		return HttpResponse()
 
@@ -77,6 +83,28 @@ class UserView(View):
 		print("usr {} type {}".format(usr, type(usr)))
 
 		return JsonResponse(model_to_dict(usr))
+
+	@staticmethod
+	def post(request, userId):
+		body = None
+		try:
+			body = json.loads(request.body.decode('utf-8'))
+		except json.decoder.JSONDecodeError as e:
+			return HttpResponseBadRequest('Invalid json: {}'.format(e))
+
+
+		usr = None
+		try:
+			usr = User.objects.get(pk=userId)
+		except User.DoesNotExist:
+			raise Http404("User does not exist")
+
+		for k, v in body.items():
+			setattr(usr, k, v)
+
+		usr.save()
+
+		return HttpResponse()
 
 
 class WorkoutRecommendation(View):
