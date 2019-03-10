@@ -86,20 +86,41 @@ Answer format:
 ```
 {
 	"monday": {
-		"breakfast": [
-			{
-				"name": string,
-				"description": string,
-				"link": string,
-				"picture": string,         #url
+		"breakfast":
+			{	#recipe object
+				"glutenFree" : false,
+				 "ingredients" : [
+				       "arugula",
+				       "baguette",
+				       "basil",
+				       "butter",
+				       "canned tomatoes",
+				       "crushed red pepper",
+				       "eggs",
+				       "garlic cloves",
+				       "olive oil",
+				       "onion",
+				       "parmesan cheese",
+				       "parmesan cheese",
+				       "rosemary",
+				       "salt and pepper",
+				       "salt and pepper",
+				       "thyme"
+				    ],
+				  "id" : 640636, #id as returned from the Recipes API.
+				  "title" : "Creamy Egg Marinara Breakfast Dip",
+				  "cuisines" : [],
+				  "vegan" : false,
+				  "image" : "https://spoonacular.com/recipeImages/640636-556x370.jpg",
+				  "vegetarian" : false
 			}
-		],
-		"lunch": [
+		,
+		"lunch": {
 			...
-		],
-		"dinner": [
+		},
+		"dinner": {
 			...
-		]
+		}
 	},
 	"tuesday": {
 		...
