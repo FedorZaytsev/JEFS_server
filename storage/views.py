@@ -1,12 +1,10 @@
-from django.shortcuts import render
-from django.urls import path
 from django.http import HttpResponse, Http404, HttpResponseBadRequest, JsonResponse
 from django.views import View
 from .models import *
 from django.forms.models import model_to_dict
 import time
 from . import recommendations
-
+from .recipes import get_random_recipe_data, recipes_list_to_dicts
 import json
 
 class StepCountView(View):
@@ -122,11 +120,7 @@ class WorkoutRecommendation(View):
 class RecepiesRecommendation(View):
 	@staticmethod
 	def get(request, userId=None):
-		step_count = StepCount.objects.filter(userId=userId)
-		step_count = [model_to_dict(e) for e in step_count]
-		locations = Locations.objects.filter(userId=userId)
-		locations = [model_to_dict(e) for e in locations]
 		return JsonResponse({
-			'result': recommendations.recommend_recepies(userId, step_count=step_count, locations=locations)
+			'result': recommendations.recommend_recipes(userId)
 		})
 

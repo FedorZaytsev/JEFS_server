@@ -13,7 +13,7 @@ class User(models.Model):
 
 
 class Locations(models.Model):
-	userId = models.ForeignKey(User, on_delete=models.CASCADE,)
+	userId = models.ForeignKey(User, on_delete=models.CASCADE)
 	longitude = models.FloatField()
 	latitude = models.FloatField()
 	timestamp = models.PositiveIntegerField()
