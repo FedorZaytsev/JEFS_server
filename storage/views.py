@@ -124,3 +124,17 @@ class RecepiesRecommendation(View):
 			'result': recommendations.recommend_recipes(userId)
 		})
 
+class RecipesView(View):
+	@staticmethod
+	def get(request, userId=None):
+		count = int(request.GET.get('count', '10'))
+		response = get_random_recipe_data(count, to_json=True)
+
+		return JsonResponse({
+			'result': response
+		})
+
+
+
+
+

@@ -26,7 +26,7 @@ class Locations(models.Model):
 		})
 
 class StepCount(models.Model):
-	userId = models.ForeignKey(User, on_delete=models.CASCADE,)
+	userId = models.ForeignKey(User, on_delete=models.CASCADE)
 	stepCount = models.PositiveIntegerField()
 	timestamp = models.PositiveIntegerField()
 
@@ -35,4 +35,8 @@ class StepCount(models.Model):
 			'stepCount': self.stepCount,
 			'timestamp': self.timestamp,
 		})
+
+class LikedRecepy(models.Model):
+	userId = models.ForeignKey(User, on_delete=models.CASCADE)
+	recepyName = models.CharField(max_length=200)
 

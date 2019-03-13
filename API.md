@@ -153,3 +153,9 @@ Answer format:
 }
 ```
 
+
+### Get cuisines:
+Method to get available recepies to show to user and get their preferences
+
+`GET /user/<user_id>/storage/recipes`
+
