@@ -9,7 +9,8 @@ class User(models.Model):
     bmigoal = models.FloatField()
     gender = models.CharField(max_length=10)
     age = models.PositiveIntegerField()
-    ethnicity = models.CharField(max_length=200)
+    cuisine = models.CharField(max_length=2000)
+    targetWeight = models.CharField(max_length=200)
 
 
 class Locations(models.Model):
