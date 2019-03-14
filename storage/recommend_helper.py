@@ -38,6 +38,7 @@ def load_unique_ingredients():
 
 def compute_daily_calories_intake(user):
     """ Based on user current bmi and goal bmi, return daily required calories."""
+    # current_bmi = 703* user['weight'] / (user['height']*12)**2
     return 1800
 
 def create_recipes_profiles(recipes, features_vocab_inv, incl_diets = False):
@@ -104,4 +105,5 @@ def create_weekly_recommendations(meal_type_to_recipes, rec_ids_to_recipe, recip
             else: weekly_plan[day][meal_type] = rec_ids_to_recipe[recipes[i]]
     return weekly_plan
 
-
+def get_toy_user():
+    return {'id':1, 'name': 'Efi', 'weight': 130.073, 'height': 5.24934, 'bmigoal': None, 'gender': 'Female', 'age': 28}

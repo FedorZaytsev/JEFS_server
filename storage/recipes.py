@@ -162,12 +162,12 @@ def get_random_recipe_data(number=10, use_toy_data=True, to_json = False):
     """ Get random recipe data in order to show to the user. Then the user selects those that he prefers."""
     if use_toy_data:
         retriever = RecipeDiskRetriever()
-        random_recipes = retriever.retrieve_random_recipes()
+        recipes = retriever.retrieve_random_recipes()
     else:
         retriever = RecipeAPIRetriever()
-        random_recipes = retriever.retrieve_random_recipes(number)
-    recipes = parse_recipes_json(random_recipes)
-    if to_json: return recipes_list_to_dicts(recipes)
+        recipes = retriever.retrieve_random_recipes(number)
+    if to_json:
+        return [recipe._asdict() for recipe in recipes.values()]
     return recipes
 
 
