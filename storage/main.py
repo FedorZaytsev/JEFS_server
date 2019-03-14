@@ -1,7 +1,7 @@
 """ I used this module to create toy data and text the recommendations."""
 from storage.create_toy_data import *
 from storage.recommend_helper import create_features_vocab
-from storage.recommendations import recommend_recipes
+from storage.recommendations import recommend_recipes, get_random_recipe_data
 import pickle
 import json
 import os
@@ -32,5 +32,7 @@ def create_toy_data():
 
 if __name__=='__main__':
     # create_toy_data()
-    most_similar_per_meal_type = recommend_recipes(userId=1)
-    print(most_similar_per_meal_type)
+    # most_similar_per_meal_type = recommend_recipes(userId=1)
+    # print(most_similar_per_meal_type)
+    recipes = get_random_recipe_data(3, use_toy_data=True, to_json=True)
+    print(recipes)
