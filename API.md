@@ -80,7 +80,7 @@ Saves step counter on the server
 ### Get recepies
 Get recepies recommendations from the server
 
-`GET /user/<user_id>/recommendations/recepies`
+`GET /user/<user_id>/recommendations/recipes`
 
 Answer format:
 
