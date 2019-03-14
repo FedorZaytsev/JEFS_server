@@ -65,7 +65,7 @@ class UserView(View):
 		except json.decoder.JSONDecodeError as e:
 			return HttpResponseBadRequest('Invalid json: {}'.format(e))
 
-
+		body['cuisine'] = json.dumps(body.get('cuisine', []))
 		usr = User(id=userId, **body)
 		usr.save()
 		return HttpResponse()
@@ -80,7 +80,10 @@ class UserView(View):
 
 		print("usr {} type {}".format(usr, type(usr)))
 
-		return JsonResponse(model_to_dict(usr))
+		usr = model_to_dict(usr)
+		usr['cuisine'] = json.loads(usr.get('cuisine', '[]'))
+
+		return JsonResponse(usr)
 
 	@staticmethod
 	def post(request, userId):
@@ -98,6 +101,8 @@ class UserView(View):
 			raise Http404("User does not exist")
 
 		for k, v in body.items():
+			if k == 'cuisine':
+				v = json.dumps(v)
 			setattr(usr, k, v)
 
 		usr.save()

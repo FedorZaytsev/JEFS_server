@@ -14,9 +14,10 @@ Creates user. No pass for now
 	"weight": float,
 	"height": float,
 	"bmigoal": float,
+	"targetWeight": float,
 	"gender": string,
 	"age": int,
-	"ethnicity": string,
+	"cuisine": []string,
 }
 ```
 
