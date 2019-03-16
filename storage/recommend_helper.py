@@ -7,8 +7,9 @@ from numpy.linalg import norm
 import heapq
 from random import shuffle
 import collections
-from django.conf import settings
 import os
+from django.conf import settings
+# from .models import User
 
 def load_features_vocabs():
     with open(os.path.join(settings.TOY_DATA_FOLDER, 'features_vocab.pkl'),'rb') as f:
@@ -37,9 +38,19 @@ def load_unique_ingredients():
 
 
 def compute_daily_calories_intake(user):
-    """ Based on user current bmi and goal bmi, return daily required calories."""
-    # current_bmi = 703* user['weight'] / (user['height']*12)**2
-    return 1800
+    """ Based on user current bmr and expected burnt calories, return daily required calories."""
+    weight_to_lose = user.weight - user.targetWeight
+    return calculate_bmr(user) + calculate_expected_burnt_calories(user) - weight_to_lose
+
+def calculate_bmr(user):
+    if user.gender=='male':
+        bmr = 66.5 + (13.75 * user.weight) + (5 * user.height) - (6.755 * user.age)
+    else:
+        bmr = 655.1 + (9.6 * user.weight) + (1.8 * user.height) - (4.7 * user.age)
+    return bmr
+
+def calculate_expected_burnt_calories(user):
+    return 500
 
 def create_recipes_profiles(recipes, features_vocab_inv, incl_diets = False):
     """Create vector models for recipes."""
@@ -101,9 +112,14 @@ def create_weekly_recommendations(meal_type_to_recipes, rec_ids_to_recipe, recip
     weekly_plan = collections.defaultdict(dict)
     for i,day in enumerate(week_days):
         for meal_type, recipes in meal_type_to_recipes.items():
-            if recipes_to_dict: weekly_plan[day][meal_type] = rec_ids_to_recipe[recipes[i]]._asdict()
+            if recipes_to_dict: weekly_plan[day][meal_type] = rec_ids_to_recipe[recipes[i]].__dict__
             else: weekly_plan[day][meal_type] = rec_ids_to_recipe[recipes[i]]
     return weekly_plan
 
-def get_toy_user():
-    return {'id':1, 'name': 'Efi', 'weight': 130.073, 'height': 5.24934, 'bmigoal': None, 'gender': 'Female', 'age': 28}
+def get_user(userId, toy_user = True):
+    User = collections.namedtuple('User', 'name weight height bmigoal gender age targetWeight')
+    if toy_user:
+        return User(name='Efi',weight=60,height=160,bmigoal=None, gender='female',age=28, targetWeight = 59.5)
+    else:
+        pass
+        # return User.objects.get(userId=userId)

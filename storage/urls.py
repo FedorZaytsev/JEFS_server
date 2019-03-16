@@ -1,7 +1,6 @@
 from django.urls import path
 from .views import *
 
-
 urlpatterns = [
     path('storage/stepcount', StepCountView.as_view()),
     path('storage/location', LocationView.as_view()),

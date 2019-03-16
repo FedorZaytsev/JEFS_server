@@ -6,7 +6,7 @@ import json
 
 def recommend_workout(userId, **kwargs):
 	print("Start recommendation engine for user {}. Arguments {}".format(userId, kwargs))
-
+	print(kwargs)
 	# example for to find nearby places
 	for location in kwargs['locations']:
 		places = gmaps.getNearby(location['latitude'], location['longitude'], radius=20)
@@ -20,12 +20,11 @@ def recommend_workout(userId, **kwargs):
 	return []
 
 def recommend_recipes(userId, **kwargs):
-	print(userId)
+
 	print("Start recommendation engine for user {}. Arguments {}".format(userId, kwargs))
 
 	# get user info (weight etc) from db.
-	# user = User.objects.get(userId=userId)
-	user_info = ""
+	user_info = get_user(userId, toy_user = True)
 	# get user favorite recipes data from db
 	user_recipes = get_user_recipe_data(userId, use_toy_data=True)
 	# based on user current weight and current goal, compute daily calories intake

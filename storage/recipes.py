@@ -7,8 +7,18 @@ import os
 from django.conf import settings
 
 meal_types = {0: 'breakfast', 1: 'lunch', 2: 'dinner'}
-Recipe = collections.namedtuple('Recipe', 'id title ingredients image vegetarian vegan cuisines glutenFree')
 
+class Recipe:
+    def __init__(self, id, title, ingredients, image, vegetarian, vegan, cuisines, glutenFree, nutrition):
+        self.id = id
+        self.title = title
+        self.ingredients = ingredients
+        self.image = image
+        self.vegetarian = vegetarian
+        self.vegan = vegan
+        self.cuisines = cuisines
+        self.glutenFree = glutenFree
+        self.nutrition = nutrition
 
 class RecipeAPI:
     """This class poses queries to the recipes API"""
@@ -28,7 +38,7 @@ class RecipeAPI:
         return r.json()
 
     def get_recipes_by_ids(self, ids):
-        params = {'ids': ids}
+        params = {'ids': ids, 'includeNutrition': 'true'}
         r = requests.get(self.url + 'informationBulk', headers=self.headers, params=params)
         return r.json()
 
@@ -40,8 +50,12 @@ class RecipeAPIRetriever:
     def __init__(self):
         self.recipe_api = RecipeAPI()
 
-    def retrieve_random_recipes(self, number):
+    def retrieve_random_recipes(self, number, nutrition = True):
         random_recipes = parse_recipes_json(self.recipe_api.get_random_recipes(number)['recipes'])
+        if nutrition:
+            recipes_infos = self.retrieve_recipes_by_id(random_recipes.keys())
+            for id in recipes_infos.keys():
+                random_recipes[id].nutrition = recipes_infos[id].nutrition
         return random_recipes
 
     def retrieve_recipes_by_id(self, ids):
@@ -98,11 +112,16 @@ def parse_recipes_json(recipes_json):
     for recipe_json in recipes_json:
         ingredients = extract_ingredients(recipe_json['extendedIngredients'])
         image = ""
+        nutrition = {}
         if 'image' in recipe_json:
             image = recipe_json['image']
+        if 'nutrition' in recipe_json:
+            nutrition_json = recipe_json['nutrition']
+            for i,nutr in enumerate(nutrition_json['nutrients'][:8]):
+                nutrition[nutr['title']] = nutr['amount']
         recipe = Recipe(id=recipe_json['id'], title=recipe_json['title'], ingredients=ingredients, image=image,
                         vegetarian=recipe_json['vegetarian'], glutenFree=recipe_json['glutenFree'],
-                        vegan=recipe_json['vegan'], cuisines=recipe_json['cuisines'])
+                        vegan=recipe_json['vegan'], cuisines=recipe_json['cuisines'], nutrition = nutrition)
         recipe_ids_to_recipe[recipe_json['id']] = recipe
     return recipe_ids_to_recipe
 
@@ -167,12 +186,12 @@ def get_random_recipe_data(number=10, use_toy_data=True, to_json = False):
         retriever = RecipeAPIRetriever()
         recipes = retriever.retrieve_random_recipes(number)
     if to_json:
-        return [recipe._asdict() for recipe in recipes.values()]
+        return [recipe.__dict__ for recipe in recipes.values()]
     return recipes
 
 
 def recipes_list_to_dicts(recipes_list):
-    return [recipe._asdict() for recipe in recipes_list]
+    return [recipe.__dict__ for recipe in recipes_list]
 
 
 def get_unique_ingredients(ingredients_path='../sample_data/ingredients.csv'):
