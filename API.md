@@ -171,3 +171,32 @@ Method to get available recepies to show to user and get their preferences
 
 `GET /user/<user_id>/storage/recipes`
 
+Answer format:
+
+
+### Mark recipe as liked:
+
+`POST /user/<user_id>/recipe/<recipe_id>/like`
+
+
+### Save user history
+
+`POST /user/<user_id>/profile?date=yyyy-mm-dd`
+
+Body:
+```
+{
+	"weigth": float,
+	"height": float
+}
+```
+
+### Get consumed calories:
+
+`GET /user/<userId>/calories?from=yyyy-mm-dd&to=yyyy-mm-dd`
+
+
+### Get consumed nutrients:
+
+`GET /user/<userId>/nutrients?from=yyyy-mm-dd&to=yyyy-mm-dd`
+
