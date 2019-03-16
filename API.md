@@ -11,13 +11,13 @@ Creates user. No pass for now
 ```
 {
 	"name": string,
-	"weight": float,
-	"height": float,
+	"weight": float, # kg
+	"height": float, # cm
 	"bmigoal": float,
-	"targetWeight": float,
-	"gender": string,
+	"targetWeight": float, # kg
+	"gender": "male" | "female" | "other" | "n/a",
 	"age": int,
-	"cuisine": []string,
+	"cuisine": string[],
 }
 ```
 
@@ -38,12 +38,13 @@ Set user params, like BMI, weight, height ...
 ```
 {
 	"name": string,
-	"weight": float,
-	"height": float,
+	"weight": float, # kg
+	"height": float, # cm
 	"bmigoal": float,
-	"gender": string,
+	"targetWeight": float, # kg
+	"gender": "male" | "female" | "other" | "n/a",
 	"age": int,
-	"ethnicity": string,
+	"cuisine": string[],
 }
 ```
 
@@ -80,7 +81,7 @@ Saves step counter on the server
 ### Get recepies
 Get recepies recommendations from the server
 
-`GET /user/<user_id>/recommendations/recepies`
+`GET /user/<user_id>/recommendations/recipes`
 
 Answer format:
 
