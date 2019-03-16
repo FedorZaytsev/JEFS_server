@@ -10,7 +10,7 @@ class User(models.Model):
     gender = models.CharField(max_length=10)
     age = models.PositiveIntegerField()
     cuisine = models.CharField(max_length=2000)
-    targetWeight = models.CharField(max_length=200)
+    targetWeight = models.FloatField()
 
 
 class Locations(models.Model):
@@ -37,7 +37,29 @@ class StepCount(models.Model):
 			'timestamp': self.timestamp,
 		})
 
+class Recipe(models.Model):
+	id = models.PositiveIntegerField(primary_key=True)
+	title = models.CharField(max_length=200)
+	cuisines = models.CharField(max_length=500)
+	vegan = models.BooleanField()
+	image = models.CharField(max_length=200)
+	vegetarian = models.BooleanField()
+	ingredients = models.CharField(max_length=1000)
+	glutenFree = models.BooleanField()
+	calories = models.PositiveIntegerField()
+	fat = models.PositiveIntegerField()
+	carb = models.PositiveIntegerField()
+	protein = models.PositiveIntegerField()
+
+
 class LikedRecepy(models.Model):
 	userId = models.ForeignKey(User, on_delete=models.CASCADE)
-	recepyName = models.CharField(max_length=200)
+	recipeId = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+	timestamp = models.DateField()	
+
+class UserHistory(models.Model):
+	userId = models.ForeignKey(User, on_delete=models.CASCADE)
+	weight = models.FloatField()
+	height = models.FloatField()
+	timestamp = models.DateField()
 
