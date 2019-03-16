@@ -19,9 +19,14 @@ class StepCountView(View):
 		except json.decoder.JSONDecodeError as e:
 			return HttpResponseBadRequest('Invalid json: {}'.format(e))
 
+		usr = None
+		try:
+			usr = User.objects.get(pk=userId)
+		except User.DoesNotExist:
+			raise Http404("User does not exist")
 
 		step = StepCount(
-			userId=userId, 
+			userId=usr, 
 			stepCount=body['count'], 
 			timestamp=int(time.time()),
 		)
