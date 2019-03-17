@@ -86,12 +86,12 @@ Get recepies recommendations from the server
 Answer format:
 
 ```
-{
-	"monday": {
-		"breakfast":
-			{	#recipe object
+{ "result": {
+	{
+		"monday": {
+			"breakfast":{	#recipe object
 				"glutenFree" : false,
-				 "ingredients" : [
+				"ingredients" : [
 				       "arugula",
 				       "baguette",
 				       "basil",
@@ -109,33 +109,33 @@ Answer format:
 				       "salt and pepper",
 				       "thyme"
 				    ],
-				  "id" : 640636, #id as returned from the Recipes API.
-				  "title" : "Creamy Egg Marinara Breakfast Dip",
-				  "cuisines" : [],
-				  "vegan" : false,
-				  "image" : "https://spoonacular.com/recipeImages/640636-556x370.jpg",
-				  "vegetarian" : false,
-				  "nutrition" : {
-                        "Carbohydrates" : 5.91,
-                        "Sodium" : 1054.11,
-                        "Protein" : 21.76,
-                        "Sugar" : 3.41,
-                        "Saturated Fat" : 24.04,
-                        "Calories" : 557.84,
-                        "Cholesterol" : 132.39,
-                        "Fat" : 49.89
-                    }
+				"id" : 640636, #id as returned from the Recipes API.
+				"title" : "Creamy Egg Marinara Breakfast Dip",
+				"cuisines" : [],
+				"vegan" : false,
+				"image" : "https://spoonacular.com/recipeImages/640636-556x370.jpg",
+				"vegetarian" : false,
+				"nutrition" : {
+					"Carbohydrates" : 5.91,
+					"Sodium" : 1054.11,
+					"Protein" : 21.76,
+					"Sugar" : 3.41,
+					"Saturated Fat" : 24.04,
+					"Calories" : 557.84,
+					"Cholesterol" : 132.39,
+					"Fat" : 49.89
+				}
+			},
+			"lunch": {
+				...
+			},
+			"dinner": {
+				...
 			}
-		,
-		"lunch": {
+		},
+		"tuesday": {
 			...
 		},
-		"dinner": {
-			...
-		}
-	},
-	"tuesday": {
-		...
 	}
 }
 ``` 
