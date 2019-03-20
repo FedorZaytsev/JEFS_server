@@ -15,3 +15,9 @@ Create user:
 
 Show recommendations:
 `curl -v 127.0.0.1:8000/user/kekes/recommendations/workouts`
+
+## Files description
+ - sample_data - ML models and some test data for the models
+ - server225/
+   - 
+
